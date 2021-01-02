@@ -1,0 +1,38 @@
+﻿<Application x:Class="NMSTools.Builder.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             ShutdownMode="OnMainWindowClose"
+             StartupUri="Views/MainWindow_View.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- Dark Color Scheme -->
+                <ResourceDictionary Source="pack://application:,,,/NMSTools.Builder;component/Themes/Colors/Dark.xaml" />
+
+                <!-- Templates -->
+                <ResourceDictionary Source="pack://application:,,,/NMSTools.Builder;component/Themes/Label.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/NMSTools.Builder;component/Themes/Button.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/NMSTools.Builder;component/Themes/RepeatButton.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/NMSTools.Builder;component/Themes/ToggleButton.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/NMSTools.Builder;component/Themes/RadioButton.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/NMSTools.Builder;component/Themes/ScrollBar.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/NMSTools.Builder;component/Themes/ScrollViewer.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/NMSTools.Builder;component/Themes/ToolTip.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/NMSTools.Builder;component/Themes/TextBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/NMSTools.Builder;component/Themes/CheckBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/NMSTools.Builder;component/Themes/ComboBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/NMSTools.Builder;component/Themes/Expander.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/NMSTools.Builder;component/Themes/GridSplitter.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/NMSTools.Builder;component/Themes/GroupBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/NMSTools.Builder;component/Themes/ListBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/NMSTools.Builder;component/Themes/ListView.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/NMSTools.Builder;component/Themes/PasswordBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/NMSTools.Builder;component/Themes/ProgressBar.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/NMSTools.Builder;component/Themes/ResizeGrip.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/NMSTools.Builder;component/Themes/Slider.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/NMSTools.Builder;component/Themes/Viewport.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/NMSTools.Builder;component/Themes/Window.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

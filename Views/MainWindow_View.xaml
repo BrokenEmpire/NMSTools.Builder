@@ -1,0 +1,187 @@
+﻿<b:WindowView xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+              xmlns:hx="http://helix-toolkit.org/wpf/SharpDX"
+              xmlns:b="clr-namespace:NMSTools.Builder.Base"
+              xmlns:vm="clr-namespace:NMSTools.Builder.ViewModels"
+              x:Class="NMSTools.Builder.Views.MainWindow_View"
+              x:TypeArguments="vm:MainWindow_ViewModel"
+              Style="{StaticResource {x:Type b:WindowView}}"
+              WindowStartupLocation="CenterScreen"
+              Title="NMS Builder"
+              Height="700"
+              Width="1300"
+              mc:Ignorable="d">
+    <b:WindowView.Resources>
+        <DataTemplate x:Key="buildItemTemplate">
+            <hx:MeshGeometryModel3D Geometry="{Binding Geometry}"
+                                    Transform="{Binding Transform}"
+                                    Material="{Binding Material}" />
+        </DataTemplate>
+    </b:WindowView.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Outter Left Area -->
+            <Grid Grid.Column="0">
+
+            </Grid>
+
+            <!-- Center Content Area -->
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.OpacityMask>
+                    <VisualBrush>
+                        <VisualBrush.Visual>
+                            <Border Background="Black"
+                                    SnapsToDevicePixels="True"
+                                    CornerRadius="3"
+                                    Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Border}}"
+                                    Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Border}}">
+                            </Border>
+                        </VisualBrush.Visual>
+                    </VisualBrush>
+                </Grid.OpacityMask>
+
+                <!-- 3D Content -->
+                <hx:Viewport3DX x:Name="viewPort"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="3"
+                                EffectsManager="{Binding Path=EffectsManager}"
+                                Camera="{Binding Path=Camera}"
+                                FXAALevel="Medium"
+                                ShowCoordinateSystem="True"
+                                EnableDesignModeRendering="False"
+                                EnableSwapChainRendering="False"
+                                IsShadowMappingEnabled="True"
+                                ShowFrameRate="False"
+                                UseDefaultGestures="False">
+
+                    <hx:Viewport3DX.InputBindings>
+                        <KeyBinding Command="hx:ViewportCommands.BackView"
+                                    Key="B" />
+                        <KeyBinding Command="hx:ViewportCommands.FrontView"
+                                    Key="F" />
+                        <KeyBinding Command="hx:ViewportCommands.TopView"
+                                    Key="U" />
+                        <KeyBinding Command="hx:ViewportCommands.BottomView"
+                                    Key="D" />
+                        <KeyBinding Command="hx:ViewportCommands.LeftView"
+                                    Key="L" />
+                        <KeyBinding Command="hx:ViewportCommands.RightView"
+                                    Key="R" />
+                        <KeyBinding Command="hx:ViewportCommands.ZoomExtents"
+                                    Gesture="Control+E" />
+                        <MouseBinding Command="hx:ViewportCommands.Rotate"
+                                      Gesture="RightClick" />
+                        <MouseBinding Command="hx:ViewportCommands.Zoom"
+                                      Gesture="MiddleClick" />
+                        <MouseBinding Command="hx:ViewportCommands.Pan"
+                                      Gesture="LeftClick" />
+                    </hx:Viewport3DX.InputBindings>
+
+                    <hx:ShadowMap3D OrthoWidth="200" />
+                    <hx:AmbientLight3D Color="{Binding Path=AmbientLightColor}" />
+                    <hx:DirectionalLight3D Color="{Binding Path=DirectionalLightColor}"
+                                           Direction="{Binding Path=Camera.LookDirection}" />
+
+                    <hx:AxisPlaneGridModel3D AutoSpacing="false"
+                                             RenderShadowMap="true"
+                                             Offset="1" />
+
+                    <hx:ItemsModel3D ItemsSource="{Binding Path=BuildingItmeCollection}"
+                                     ItemTemplate="{StaticResource buildItemTemplate}" />
+
+                    <hx:PostEffectMeshBorderHighlight EffectName="highlight" />
+
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDown3D"
+                                        SourceObject="{Binding RelativeSource={RelativeSource TemplatedParent}}">
+
+                            <i:InvokeCommandAction Command="{Binding Path=MouseDownCommand}"
+                                                   PassEventArgsToCommand="True" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </hx:Viewport3DX>
+
+                <!-- Inner Left Area -->
+                <Border Grid.Column="0"
+                        CornerRadius="3"
+                        Margin="3"
+                        BorderThickness="1"
+                        BorderBrush="{StaticResource WindowTitleBrush}"
+                        Background="{StaticResource WindowDarkAlphaBackgroundBrush}">
+                    <Grid Margin="3">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Label Content="Inner Left Area" />
+                    </Grid>
+                </Border>
+
+                <!-- Inner Right Area -->
+                <Border Grid.Column="2"
+                        CornerRadius="3"
+                        Margin="3"
+                        BorderThickness="1"
+                        BorderBrush="{StaticResource WindowTitleBrush}"
+                        Background="{StaticResource WindowDarkAlphaBackgroundBrush}">
+                    <Grid Margin="3">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Label Content="Inner Right Area" />
+                    </Grid>
+                </Border>
+            </Grid>
+
+            <!-- Outter Right Area -->
+            <Border Grid.Column="2"
+                    Background="{StaticResource WindowDarkBackgroundBrush}"
+                    CornerRadius="3"
+                    Margin="3,0,0,0">
+                <TreeView BorderThickness="0">
+                    <TreeViewItem Header="Scene"></TreeViewItem>
+                </TreeView>
+            </Border>
+        </Grid>
+
+        <!-- Status Bar Area -->
+        <Grid Grid.Row="1"
+              Margin="0,0,10,0">
+
+            <TextBlock Padding="3,2"
+                       FontSize="14"
+                       Foreground="{StaticResource WindowTitleBrush}"
+                       Text="{Binding ElementName=viewPort, Path=FrameRate, StringFormat=FPS: \{0:G3\}}" />
+
+
+            <TextBlock Padding="3,2"
+                       FontSize="14"
+                       HorizontalAlignment="Right"
+                       Foreground="{StaticResource WindowTitleBrush}"
+                       Text="{Binding Path=AssemblyVersion, StringFormat=Version: \{0\}}" />
+        </Grid>
+    </Grid>
+
+</b:WindowView>
