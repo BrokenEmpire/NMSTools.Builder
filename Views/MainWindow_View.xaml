@@ -180,8 +180,7 @@
                        FontSize="14"
                        HorizontalAlignment="Right"
                        Foreground="{StaticResource WindowTitleBrush}"
-                       Text="{Binding Path=AssemblyVersion, StringFormat=Version: \{0\}}" />
+                       Text="{Binding Path=AssemblyVersion, StringFormat=Version \{0\}}" />
         </Grid>
     </Grid>
-
 </b:WindowView>
